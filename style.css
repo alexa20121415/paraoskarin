@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;700&display=swap');
+
+:root {
+    --dark-blue: #1a2a40; /* Azul oscuro */
+    --light-blue: #87CEEB; /* Celeste */
+    --purple: #C8A2C8; /* Lila suave */
+    --white: #FFFFFF; /* Blanco */
+    --silver: #E0E0E0; /* Plateado para estrellas */
+    --gold: #FFD700; /* Un toque de dorado si quieres */
+}
+
+body {
+    margin: 0;
+    overflow: hidden; /* Oculta barras de scroll si aparecen */
+    font-family: 'Quicksand', sans-serif;
+    color: var(--white);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--dark-blue); /* Fondo principal */
+    position: relative;
+}
+
+.background-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Asegura que esté detrás del texto */
+}
+
+.background-carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen sin distorsionarla */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.background-carousel img.active {
+    opacity: 0.3; /* Un poco transparente para que el texto resalte */
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 1; /* Asegura que el texto esté encima */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para el texto */
+    border-radius: 15px;
+    max-width: 80%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.message-container {
+    text-align: center;
+}
+
+h1#main-message {
+    font-family: 'Pacifico', cursive; /* Fuente más elegante */
+    font-size: 3em; /* Tamaño grande para el mensaje */
+    color: var(--light-blue); /* Color celeste para el título */
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    overflow: hidden; /* Oculta el texto que aún no aparece */
+    white-space: pre-wrap; /* Mantiene saltos de línea y espacios */
+    border-right: .15em solid var(--purple); /* Cursor de máquina de escribir */
+    animation: 
+        typing 4s steps(60, end) forwards,
+        blink-caret .75s step-end infinite;
+    max-width: 0; /* Inicia invisible para el efecto typing */
+    display: inline-block; /* Necesario para typing */
+}
+
+p#signature {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5em;
+    color: var(--purple); /* Color lila para la firma */
+    margin-top: 30px;
+    opacity: 0; /* Inicia invisible */
+    animation: fadeIn 2s ease-in 5s forwards; /* Aparece después del mensaje */
+}
+
+/* Animación de máquina de escribir */
+@keyframes typing {
+    from { max-width: 0 }
+    to { max-width: 100% }
+}
+
+/* Animación del cursor */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--purple); }
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Estrellas de fondo (CSS puro) */
+.star {
+    position: absolute;
+    background-color: var(--silver);
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 5s infinite ease-in-out;
+    z-index: 0;
+}
+
+.shooting-star {
+    position: absolute;
+    background: linear-gradient(to right, transparent, var(--white));
+    width: 200px;
+    height: 3px;
+    opacity: 0;
+    animation: shoot 10s infinite;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shoot {
+    0% { transform: translateX(-300px) translateY(0px) rotate(45deg); opacity: 0; }
+    5% { opacity: 1; }
+    10% { transform: translateX(100vw) translateY(50vh) rotate(45deg); opacity: 0; }
+    100% { opacity: 0; }
+}
